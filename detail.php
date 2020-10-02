@@ -1,3 +1,59 @@
+<?php 
+require_once('vendor/autoload.php');
+
+MercadoPago\SDK::setAccessToken('APP_USR-6317427424180639-042414-47e969706991d3a442922b0702a0da44-469485398');
+MercadoPago\SDK::setIntegratorId("dev_24c65fb163bf11ea96500242ac130004");
+
+$preference = new MercadoPago\Preference();
+
+$item = new MercadoPago\Item();
+$item->title = $_POST['title'];
+$item->quantity = $_POST['unit'];
+$item->unit_price = $_POST['price'];
+
+$payer = new MercadoPago\Payer();
+$payer->name = "Lalo";
+$payer->surname = "Landa";
+$payer->email = "test_user_63274575@testuser.com";
+$payer->phone = array(
+"area_code" => "11",
+"number" => "22223333"
+);
+
+// $payer->identification = array(
+// "type" => "DNI",
+// "number" => "12345678"
+// );
+
+$payer->address = array(
+"street_name" => "False",
+"street_number" => 123,
+"zip_code" => "1111"
+);
+
+$preference->items = array($item);
+$preference->payer = $payer;
+$preference->back_urls = array(
+    "success" => "https://gabolauro-mp-commerce-php.herokuapp.com/realizado.php",
+    "failure" => "https://gabolauro-mp-commerce-php.herokuapp.com/fallido.php",
+    "pending" => "https://gabolauro-mp-commerce-php.herokuapp.com/pendinete.php"
+);
+$preference->payment_methods = array(
+  "excluded_payment_methods" => array(
+    array("id" => "amex")
+  ),
+  "excluded_payment_types" => array(
+    array("id" => "atm")
+  ),
+  "installments" => 6
+);
+$preference->auto_return = "approved";
+$preference->external_reference = "";
+$preference->notification_url = "https://gabolauro-mp-commerce-php.herokuapp.com/notificaciones.php?source_news=webhooks";
+// $preference->payment_methods_id = "";
+$preference->save();
+
+ ?>
 <!DOCTYPE html>
 <html class="supports-animation supports-columns svg no-touch no-ie no-oldie no-ios supports-backdrop-filter as-mouseuser" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
@@ -11,6 +67,9 @@
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
+
+    <!-- MP security -->
+    <script src="https://www.mercadopago.com/v2/security.js" view="home"></script>
 
     <link rel="stylesheet" href="./assets/category-landing.css" media="screen, print">
 
@@ -130,7 +189,18 @@
                                             <?php echo "$" . $_POST['unit'] ?>
                                         </h3>
                                     </div>
-                                    <button type="submit" class="mercadopago-button" formmethod="post">Pagar</button>
+                                    <!-- <button type="submit" class="mercadopago-button" formmethod="post">Pagar</button> -->
+
+                                    <form action="/procesar-pago" method="POST">
+                                      <script
+                                       src="https://www.mercadopago.cl/integrations/v1/web-payment-checkout.js"
+                                       data-preference-id="<?php echo $preference->id; ?>">
+                                      </script>
+                                    </form>
+
+                                    <!-- <a href="<?php echo $preference->init_point; ?>">Pagar con Mercado Pago</a> -->
+
+
                                 </div>
                             </div>
                         </div>
