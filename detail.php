@@ -8,7 +8,10 @@ MercadoPago\SDK::setIntegratorId("dev_24c65fb163bf11ea96500242ac130004");
 $preference = new MercadoPago\Preference();
 
 $item = new MercadoPago\Item();
+$item1->id = "1234";
 $item->title = $_POST['title'];
+$item->description = "Dispositivo móvil de Tienda e-commerce";
+$item1->picture_url = $_POST['img'];
 $item->quantity = $_POST['unit'];
 $item->unit_price = $_POST['price'];
 
@@ -49,7 +52,7 @@ $preference->payment_methods = array(
   "installments" => 6
 );
 $preference->auto_return = "approved";
-$preference->external_reference = "";
+$preference->external_reference = "gaboluro@gmail.com";
 $preference->notification_url = "https://gabolauro-mp-commerce-php.herokuapp.com/notificaciones.php?source_news=webhooks";
 // $preference->payment_methods_id = "";
 $preference->save();
