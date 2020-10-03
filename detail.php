@@ -2,6 +2,7 @@
 require __DIR__ .  '/vendor/autoload.php';
 
 MercadoPago\SDK::setAccessToken('APP_USR-6317427424180639-042414-47e969706991d3a442922b0702a0da44-469485398');
+// MercadoPago\SDK::setAccessToken('APP_USR-550439050971393-062210-cd9003b3c6b1165b80349d8c8891ffdf-57835023');
 MercadoPago\SDK::setIntegratorId("dev_24c65fb163bf11ea96500242ac130004");
 
 $preference = new MercadoPago\Preference();
@@ -191,14 +192,14 @@ $preference->save();
                                     </div>
                                     <!-- <button type="submit" class="mercadopago-button" formmethod="post">Pagar</button> -->
 
-                                    <form action="/procesar-pago" method="POST">
+                                   <!--  <form action="/procesar-pago" method="POST">
                                       <script
                                        src="https://www.mercadopago.cl/integrations/v1/web-payment-checkout.js"
                                        data-preference-id="<?php echo $preference->id; ?>">
                                       </script>
-                                    </form>
+                                    </form> -->
 
-                                    <!-- <a href="<?php echo $preference->init_point; ?>">Pagar con Mercado Pago</a> -->
+                                    <a href="<?php echo $preference->init_point; ?>">Pagar con Mercado Pago</a>
 
 
                                 </div>
