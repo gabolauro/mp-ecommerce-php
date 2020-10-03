@@ -184,10 +184,10 @@ $preference->save();
                                             </h3>
                                         </div>
                                         <h3 >
-                                            <?php echo $_POST['price'] ?>
+                                            <?php echo "$" . $_POST['price'] ?>
                                         </h3>
                                         <h3 >
-                                            <?php echo "$" . $_POST['unit'] ?>
+                                            <?php echo $_POST['unit'] ?>
                                         </h3>
                                     </div>
                                     <!-- <button type="submit" class="mercadopago-button" formmethod="post">Pagar</button> -->
@@ -199,7 +199,7 @@ $preference->save();
                                       </script>
                                     </form> -->
 
-                                    <a href="<?php echo $preference->init_point; ?>">Pagar con Mercado Pago</a>
+                                    <a class="mercadopago-button" href="<?php echo $preference->init_point; ?>">Pagar con Mercado Pago</a>
 
 
                                 </div>
