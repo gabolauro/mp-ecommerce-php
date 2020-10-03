@@ -53,7 +53,7 @@ $preference->payment_methods = array(
 );
 $preference->auto_return = "approved";
 $preference->external_reference = "gaboluro@gmail.com";
-$preference->notification_url = "https://gabolauro-mp-commerce-php.herokuapp.com/notificaciones.php?source_news=webhooks";
+$preference->notification_url = "http://eicom2.com.ar/mp/notificaciones.php?source_news=webhooks";
 // $preference->payment_methods_id = "";
 $preference->save();
 
